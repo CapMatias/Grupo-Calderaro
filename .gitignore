@@ -1,0 +1,6 @@
+# estado de plugins do editor (aparece em qualquer pasta)
+.claude-flow/
+# saída de "node build.js --preview" (só para o preview do app)
+.preview/
+# rascunho de vídeo que nenhuma página usa
+video/janela-max-1080.mp4
