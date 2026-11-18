@@ -193,8 +193,9 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
 .legal{margin-top:4.8rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1rem;font-weight:500;opacity:.5;display:flex;justify-content:space-between;gap:1.6rem;flex-wrap:wrap}
 
 @media (max-width:820px){
-  .top{grid-template-columns:1fr auto}
-  .top .city{display:none}
+  /* cidade e telefone somem (telefone segue no rodapé e o WhatsApp no dock); o nome fica na coluna do meio */
+  .top .city,.top .phone{display:none}
+  .top .mark{grid-column:2}
   .rating-cue{display:none}
   .collection-head,.process-head,.reviews-grid,.store-inner{grid-template-columns:1fr}
   .pieces{grid-template-columns:1fr 1fr}
