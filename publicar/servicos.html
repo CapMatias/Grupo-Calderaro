@@ -512,7 +512,9 @@ if(scrub&&sv){
   sv.addEventListener('loadedmetadata',go);
   sv.addEventListener('loadeddata',()=>sv.classList.add('on'));
   // iPhone só carrega o vídeo depois de um play()
-  sv.play().then(()=>{sv.pause();go()}).catch(()=>{});
+  const prime=()=>sv.play().then(()=>{sv.pause();go()}).catch(()=>{});
+  // vídeo inteiro na memória: hospedagem sem Range (Cloudflare Workers) deixa o vídeo sem poder pular para outro ponto
+  fetch(sv.src).then(r=>r.ok?r.blob():Promise.reject()).then(b=>{sv.src=URL.createObjectURL(b)}).catch(()=>{}).finally(prime);
 }
 
 // avaliações: duplica a lista para o loop contínuo
