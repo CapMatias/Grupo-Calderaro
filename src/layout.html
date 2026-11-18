@@ -323,6 +323,14 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
   .steps li{border-bottom-color:transparent;row-gap:0}
   .steps li::after{margin-top:2.4rem;margin-bottom:-2.4rem}
 }}
+/* plano B sem animation-timeline (iPhone antes do iOS 26, Firefox): o JS põe .io no html e .in em cada elemento que entra na tela; a animação toca uma vez */
+.io .wide figure{animation:slide-open 1.2s var(--ease-io) both paused}
+.io .wide img,.io .store-photo img{animation:zoom-out 1.6s var(--ease-out) both paused}
+.io .piece{animation:unclip 1s var(--ease-out) both paused}
+.io .piece li{animation:pop .6s var(--ease-out) .3s both paused}
+.io .statement p span{color:#c4beb6;animation:ink .5s calc(var(--i) * 30ms) both paused}
+.io :is(.collection-head,.store h2,.store-info,.process-head h2,.rv-viewport,.proj li,.reviews h2,.score,.cta h2,.steps li,.split,.pcard,.facts div,.form,.contact dl){animation:rise-in .9s var(--ease-out) both paused}
+.io .in{animation-play-state:running!important}
 @keyframes sink{to{translate:0 22%}}
 @keyframes lift{to{translate:0 -80px}}
 @keyframes ink{to{color:var(--text)}}
@@ -465,6 +473,14 @@ if(peek&&proj&&fine){
 // frase de destaque: quebra em palavras para a animação de tinta
 const st=$('.statement p');
 if(st)st.innerHTML=st.textContent.trim().split(/\s+/).map((w,i)=>`<span style="--i:${i}">${w}</span>`).join(' ');
+
+// plano B (CSS ".io"): sem animação ligada à rolagem, cada elemento anima uma vez ao entrar na tela
+if(!calm&&!CSS.supports('animation-timeline','view()')){
+  document.documentElement.classList.add('io');
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+  // observa só o que o CSS ".io" deixou pausado esperando entrar na tela
+  for(const el of document.body.querySelectorAll('*'))if(getComputedStyle(el).animationPlayState==='paused')io.observe(el);
+}
 
 // menu do dock
 const btn=$('#menuBtn'),menu=$('#menu');
