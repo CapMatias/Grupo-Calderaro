@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* Tokens no padrão do fluid.glass: cores, escala fluida em rem e curvas de animação */
 :root{
   --ink:#0b1012;
   --ink-2:#212325;
@@ -28,8 +27,6 @@
   --gutter:4rem;
   --gap:2rem;
 }
-/* 1rem = 10px numa tela de 1600px (375px no celular), como no site base.
-   shortcut: piso de 8px e teto de 14px para não ficar ilegível em notebooks pequenos nem gigante em monitores 4K */
 html{font-size:clamp(8px,calc(100vw / 160),14px);scroll-behavior:smooth}
 @media (max-width:600px){html{font-size:min(calc(100vw / 37.5),11px)}:root{--gutter:2rem;--gap:1.5rem}}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -38,11 +35,9 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--edge);outline-offset:3px}
 
-/* títulos de seção: mono maiúsculo com losango */
 .tag{font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-size:1.4rem;font-weight:600;line-height:1.3;display:flex;align-items:center}
 .tag::before{content:"";width:.6rem;height:.6rem;background:currentColor;margin-right:1.2rem;transform:rotate(45deg) translateY(-.1rem);flex:none}
 
-/* botões: quadrados, mono maiúsculo; preto sólido ou vidro branco 20% */
 .btn{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500;line-height:1rem;display:inline-flex;align-items:center;justify-content:center;padding:1.5rem 2.4rem;border:0;cursor:pointer;transition:background .4s var(--ease-out),color .4s var(--ease-out)}
 .btn svg{width:1.4rem;height:1.1rem;margin-right:1.2rem;flex:none}
 .btn-glass{background:var(--glass);color:#fff;backdrop-filter:blur(1.28rem);-webkit-backdrop-filter:blur(1.28rem)}
@@ -50,7 +45,6 @@ a{color:inherit;text-decoration:none}
 .btn-ink{background:var(--ink);color:#fff}
 .btn-ink:hover{background:var(--ink-2)}
 
-/* topo */
 .top{position:absolute;inset:0 0 auto;z-index:20;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:2.4rem var(--gutter);color:#fff}
 .top .phone,.top .city{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500}
 .top .phone{justify-self:end}
@@ -59,7 +53,6 @@ a{color:inherit;text-decoration:none}
 .mark small{font-family:var(--mono);font-size:1rem;letter-spacing:.3em;opacity:.7;margin-bottom:.4rem}
 .mark b{font-weight:500;font-size:2.2rem;letter-spacing:-.02em}
 
-/* HERO */
 .hero{position:relative;height:100svh;min-height:560px;overflow:hidden;background:var(--ink);color:#fff}
 .hero>img,.hero>video{position:absolute;inset:0;transform:scale(1.06);animation:settle 2.4s var(--ease-out) forwards}
 .hero>video{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s}
@@ -74,19 +67,16 @@ a{color:inherit;text-decoration:none}
 .scroll-cue,.rating-cue{position:absolute;z-index:5;bottom:2.8rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500;opacity:.7}
 .scroll-cue{left:var(--gutter)}
 .rating-cue{right:var(--gutter)}
-/* home: o hero fica preso enquanto a rolagem avança o vídeo; no fim do vídeo a página desce */
 .scrub{height:300svh}
 .scrub .hero-copy{opacity:calc(1 - var(--p,0))}
 .scrub>.hero{position:sticky;top:0}
 .scrub-bar{display:block;height:1px;margin-top:.8rem;background:currentColor;transform-origin:left;scale:var(--p,0) 1}
-/* título sobe até perto do topo enquanto o vídeo avança (--p de 0 a 1 e --rise em px vêm do JS) */
 .scrub .hero h1,.scrub .hero .actions{translate:0 calc(var(--p,0) * var(--rise,0px))}
 
 @keyframes rise{to{transform:none}}
 @keyframes fade{to{opacity:1}}
 @keyframes settle{to{transform:scale(1)}}
 
-/* nav flutuante inferior */
 .dock{position:fixed;z-index:50;left:50%;bottom:2rem;transform:translateX(-50%);display:flex;align-items:center;gap:.4rem;padding:.5rem;background:color-mix(in srgb,var(--ink) 80%,transparent);backdrop-filter:blur(1.28rem);-webkit-backdrop-filter:blur(1.28rem);color:#fff}
 .dock a,.dock button{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500;line-height:1rem;padding:1.5rem 1.8rem;color:#fff;background:none;border:0;cursor:pointer;transition:background .4s var(--ease-out)}
 .dock a:hover,.dock button:hover{background:rgba(255,255,255,.1)}
@@ -94,7 +84,6 @@ a{color:inherit;text-decoration:none}
 .dock .wa:hover{background:#fff}
 .menu{position:fixed;z-index:49;left:50%;bottom:8rem;transform:translateX(-50%);width:min(40rem,calc(100vw - 3.2rem));background:color-mix(in srgb,var(--ink) 88%,transparent);backdrop-filter:blur(1.28rem);-webkit-backdrop-filter:blur(1.28rem);color:#fff;padding:4rem;visibility:hidden;opacity:0;translate:0 2.4rem;clip-path:inset(30% 0 0 0);transition:opacity .4s var(--ease-out),translate .6s var(--ease-out),clip-path .6s var(--ease-io),visibility 0s .6s}
 .menu.open{visibility:visible;opacity:1;translate:0 0;clip-path:inset(0);transition:opacity .4s var(--ease-out),translate .7s var(--ease-out),clip-path .7s var(--ease-io),visibility 0s}
-/* links entram em cascata (--k = posição) */
 .menu a{--k:0;display:flex;justify-content:space-between;align-items:baseline;padding:.6rem 0;font-size:3.2rem;line-height:3.6rem;letter-spacing:-.02em;opacity:0;translate:0 1.6rem;transition:opacity .3s,translate .3s,color .3s}
 .menu.open a{opacity:1;translate:0 0;transition:opacity .6s var(--ease-out) calc(var(--k) * 60ms + 120ms),translate .8s var(--ease-out) calc(var(--k) * 60ms + 120ms),color .3s}
 .menu a:nth-child(2){--k:1}.menu a:nth-child(3){--k:2}.menu a:nth-child(4){--k:3}.menu a:nth-child(5){--k:4}
@@ -102,7 +91,6 @@ a{color:inherit;text-decoration:none}
 .menu a span{font-family:var(--mono);font-size:1.2rem;letter-spacing:.08em;color:color-mix(in srgb,currentColor 60%,transparent);transition:translate .5s var(--ease-out)}
 .menu a:hover span{translate:-.8rem 0}
 
-/* seções */
 section{padding:16rem var(--gutter)}
 .statement{text-align:center}
 .statement .tag{justify-content:center;margin-bottom:3.2rem}
@@ -111,7 +99,6 @@ section{padding:16rem var(--gutter)}
 .wide{padding:0}
 .wide figure{height:clamp(320px,56vw,900px);overflow:hidden}
 
-/* coleção */
 .collection{border-top:1px solid var(--taupe)}
 .collection-head{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);margin-bottom:8rem}
 .collection-head p{font-size:1.8rem;line-height:1.3;max-width:42ch}
@@ -130,7 +117,6 @@ section{padding:16rem var(--gutter)}
 .p4{grid-column:2/6;aspect-ratio:3/4;margin-top:-18%}
 .p5{grid-column:6/10;aspect-ratio:4/5;margin-top:8%}
 
-/* loja */
 .store{position:relative;background:var(--ink-2);color:#fff;overflow:hidden}
 .store-inner{position:relative;min-height:clamp(520px,56vw,860px);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:var(--gap)}
 .store-photo{position:absolute;inset:0 18%;opacity:.6}
@@ -141,7 +127,6 @@ section{padding:16rem var(--gutter)}
 .store-info .btn{margin-top:2.4rem}
 .store .tag{position:relative;margin-bottom:4rem;padding-top:2.4rem;border-top:1px solid rgba(255,255,255,.14)}
 
-/* processo e projetos: cabeçalho em duas colunas */
 .process-head{display:grid;grid-template-columns:1fr 1.4fr;gap:var(--gap);margin-bottom:6.4rem}
 .process-head h2{font-weight:400;font-size:4.8rem;line-height:1;letter-spacing:-.03em;max-width:18ch;margin-bottom:3.2rem}
 .steps{list-style:none;border-top:1px solid var(--taupe)}
@@ -150,14 +135,12 @@ section{padding:16rem var(--gutter)}
 .steps h3{font-weight:400;font-size:2.4rem;line-height:1.2}
 .steps p{font-size:1.6rem;line-height:1.3;max-width:52ch}
 
-/* avaliações */
 .reviews{background:var(--mist-2)}
 .reviews-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:var(--gap)}
 .score{font-size:16rem;font-weight:300;letter-spacing:-.06em;line-height:.9}
 .score-sub{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500;margin-top:1.6rem;color:var(--alu)}
 .reviews h2{font-weight:400;font-size:4.8rem;letter-spacing:-.03em;line-height:1;max-width:12ch;margin:3.2rem 0 4rem}
 .reviews .btn{margin-top:3.2rem}
-/* coluna de avaliações rolando sozinha; pausa ao passar o mouse ou focar */
 .rv-viewport{height:min(68rem,80vh);overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(transparent,#000 10%,#000 90%,transparent)}
 .rv-track{animation:rv-scroll 160s linear infinite}
 .rv-viewport:hover .rv-track,.rv-viewport:focus-within .rv-track{animation-play-state:paused}
@@ -172,7 +155,6 @@ section{padding:16rem var(--gutter)}
 .rv a{display:inline-block;margin-top:1.4rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500;text-decoration:underline;text-underline-offset:.3rem}
 .rv a:hover{color:var(--alu)}
 
-/* projetos em destaque */
 .proj{list-style:none;border-top:1px solid var(--taupe)}
 .proj a{display:grid;grid-template-columns:1.1fr 2fr 9rem;gap:var(--gap);align-items:center;padding:2.4rem 0;border-bottom:1px solid var(--taupe);transition:padding .6s var(--ease-out),background .6s var(--ease-out)}
 .proj a:hover,.proj a:focus-visible{padding-left:1.6rem;padding-right:1.6rem;background:var(--mist-2)}
@@ -183,7 +165,6 @@ section{padding:16rem var(--gutter)}
 .peek{position:fixed;z-index:45;left:0;top:0;width:22rem;height:27rem;object-fit:cover;pointer-events:none;opacity:0;scale:.9;transition:opacity .3s,scale .5s var(--ease-out)}
 .peek.on{opacity:1;scale:1}
 
-/* rodapé / contato */
 footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
 .cta h2{font-weight:400;font-size:6.4rem;letter-spacing:-.03em;line-height:1;max-width:14ch}
 .cta .btn{margin-top:4rem}
@@ -193,7 +174,6 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
 .legal{margin-top:4.8rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1rem;font-weight:500;opacity:.5;display:flex;justify-content:space-between;gap:1.6rem;flex-wrap:wrap}
 
 @media (max-width:820px){
-  /* cidade e telefone somem (telefone segue no rodapé e o WhatsApp no dock); o nome fica na coluna do meio */
   .top .city,.top .phone{display:none}
   .top .mark{grid-column:2}
   .rating-cue{display:none}
@@ -225,13 +205,11 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
   .dock .hide-sm{display:none}
   .foot{grid-template-columns:1fr}
 }
-/* páginas internas: cabeçalho escuro com título grande, como o PageHeader do site base */
 .page-hero{background:var(--ink);color:#fff;padding:20rem var(--gutter) 8rem;display:grid;grid-template-columns:1fr 1.4fr;gap:var(--gap);align-items:end}
 .page-hero .tag{align-self:start}
 .page-hero h1{font-weight:400;font-size:6.4rem;line-height:1;letter-spacing:-.03em;max-width:14ch}
 .page-hero p{font-size:1.8rem;line-height:1.3;max-width:44ch;color:color-mix(in srgb,#fff 72%,transparent);margin-top:2.4rem}
 
-/* blocos de foto + texto (sobre e serviços) */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);align-items:center}
 .split+.split{margin-top:12rem}
 .split.flip figure{order:2}
@@ -245,12 +223,10 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
 .split dd{font-size:1.8rem;line-height:1.3}
 .split dd .btn{margin-top:2.4rem}
 
-/* números */
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);border-top:1px solid var(--taupe);padding-top:3.2rem;margin-top:8rem}
 .facts b{display:block;font-weight:300;font-size:6.4rem;letter-spacing:-.04em;line-height:1}
 .facts span{display:block;margin-top:1.2rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500;color:var(--alu)}
 
-/* grade de projetos */
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6.4rem var(--gap)}
 .pcard{display:block}
 .pcard figure{aspect-ratio:4/5;overflow:hidden;background:var(--ink)}
@@ -262,7 +238,6 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
 .pcard time{display:block;margin-top:1.2rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500;color:var(--alu)}
 .more{margin-top:8rem;text-align:center}
 
-/* contato */
 .contact{display:grid;grid-template-columns:1fr 1.4fr;gap:var(--gap)}
 .contact dt{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:1.2rem;font-weight:500;color:var(--alu);margin-top:3.2rem;margin-bottom:.6rem}
 .contact dt:first-child{margin-top:0}
@@ -295,35 +270,28 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
   .form{padding:2.4rem}
 }
 
-/* movimento ligado à rolagem. shortcut: Firefox ainda não suporta animation-timeline, lá a página fica estática */
 @supports (animation-timeline:view()){
 @media (prefers-reduced-motion:no-preference){
-  /* hero: foto desce mais devagar, texto sobe e some */
   .hero{view-timeline:--hero}
   .hero>img,.hero>video{animation:settle 2.4s var(--ease-out) forwards,sink linear both;animation-timeline:auto,--hero;animation-range:normal,exit 0% exit 100%}
   .hero-copy{animation:lift linear both;animation-timeline:--hero;animation-range:exit 0% exit 55%}
 
-  /* frase do "sobre": palavras ganham tinta conforme a rolagem */
   .statement p{view-timeline:--stmt}
   .statement p span{color:#c4beb6;animation:ink linear both;animation-timeline:--stmt;animation-range:cover calc(12% + var(--i) * 1.5%) cover calc(18% + var(--i) * 1.5%)}
 
-  /* foto larga abre como uma porta de correr */
   .wide figure{animation:slide-open linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
   .wide img,.store-photo img{animation:zoom-out linear both;animation-timeline:view()}
 
-  /* peças: aparecem e flutuam em velocidades diferentes */
   .piece{animation:unclip linear both,drift linear both;animation-timeline:view(),view();animation-range:entry 0% cover 35%,cover 0% cover 100%}
   .p1{--d:0px}.p2{--d:50px}.p3{--d:80px}.p4{--d:20px}.p5{--d:60px}
   .piece li{animation:pop linear both;animation-timeline:view();animation-range:entry 20% entry 100%}
 
-  /* títulos, citações e etapas sobem ao entrar */
   .collection-head,.store h2,.store-info,.process-head h2,.rv-viewport,.proj li,.reviews h2,.score,.cta h2,.steps li,.split,.pcard,.facts div,.form,.contact dl,.page-hero h1{animation:rise-in linear both;animation-timeline:view();animation-range:entry 5% entry 70%}
   .steps li{animation-range:entry 10% entry 90%}
   .steps li::after{content:"";grid-column:1/-1;height:1px;background:var(--text);transform-origin:left;animation:draw linear both;animation-timeline:view();animation-range:entry 40% cover 40%}
   .steps li{border-bottom-color:transparent;row-gap:0}
   .steps li::after{margin-top:2.4rem;margin-bottom:-2.4rem}
 }}
-/* plano B sem animation-timeline (iPhone antes do iOS 26, Firefox): o JS põe .io no html e .in em cada elemento que entra na tela; a animação toca uma vez */
 .io .wide figure{animation:slide-open 1.2s var(--ease-io) both paused}
 .io .wide img,.io .store-photo img{animation:zoom-out 1.6s var(--ease-out) both paused}
 .io .piece{animation:unclip 1s var(--ease-out) both paused}
@@ -342,7 +310,6 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
 @keyframes rise-in{from{opacity:0;translate:0 48px}}
 @keyframes draw{from{scale:0 1}to{scale:1 1}}
 
-/* troca de página: cortina de tinta cobre ao sair e descobre ao chegar (o JS só cuida da saída) */
 .curtain{position:fixed;inset:0;z-index:100;pointer-events:none;background:var(--ink);display:grid;place-items:center;animation:curtain-up .9s var(--ease-io) .1s both}
 .curtain b{font-weight:400;font-size:4.8rem;letter-spacing:-.03em;color:var(--mist);animation:curtain-word .9s var(--ease-io) .1s both}
 .leaving .curtain{animation:curtain-in .6s var(--ease-io) both}
@@ -351,14 +318,11 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
 @keyframes curtain-in{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0)}}
 @keyframes curtain-word{to{translate:0 -4rem;opacity:0}}
 @keyframes curtain-word-in{from{translate:0 4rem;opacity:0}}
-/* chegada: só o texto do topo, porque translate em main quebraria o .peek (position:fixed) */
 .page-hero>*{animation:arrive 1.2s var(--ease-out) .35s both}
 .page-hero>:nth-child(2){animation-delay:.45s}
-/* hero da home já tem entrada própria: só espera a cortina abrir */
 .hero h1 span i{animation-delay:.45s}.hero h1 span:nth-child(2) i{animation-delay:.57s}.hero .actions{animation-delay:1s}
 @keyframes arrive{from{translate:0 6rem;opacity:0}}
 
-/* resposta ao toque/clique */
 .btn,.dock a,.dock button{transition:background .4s var(--ease-out),color .4s var(--ease-out),scale .25s var(--ease-out)}
 .btn:active,.dock a:active,.dock button:active{scale:.94}
 .pcard figure{transition:scale .4s var(--ease-out)}
@@ -470,22 +434,18 @@ footer{background:var(--ink);color:#fff;padding:16rem var(--gutter) 12rem}
 </div>
 
 <script>
-// cada bloco só roda se a seção existir na página
 const $=s=>document.querySelector(s);
 const fine=matchMedia('(pointer:fine)').matches;
 const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 $('#y').textContent=new Date().getFullYear();
 
-// reaproveita fotos já embutidas sem repetir o base64 no arquivo
 document.querySelectorAll('img[data-from]').forEach(i=>i.src=$(i.dataset.from).src);
 
-// vídeos: aparecem só quando começam a tocar; se não carregarem, fica a foto/fundo
 document.querySelectorAll('video[data-auto]').forEach(v=>{
   v.addEventListener('playing',()=>v.classList.add('on'));
   if(!calm)v.play().catch(()=>{});
 });
 
-// home: a rolagem dentro de .scrub controla o tempo do vídeo (com leve atraso para ficar suave)
 const scrub=$('.scrub'),sv=$('video[data-scrub]');
 if(scrub&&sv){
   let t=0,raf=0;
@@ -496,23 +456,18 @@ if(scrub&&sv){
     raf=t!==g||sv.seeking?requestAnimationFrame(tick):0;
   };
   const go=()=>{if(!raf)raf=requestAnimationFrame(tick)};
-  // distância para o título chegar a 12% do topo da tela
   const copy=$('.hero-copy'),fit=()=>scrub.style.setProperty('--rise',Math.min(0,innerHeight*.12-copy.offsetTop)+'px');
   fit();addEventListener('resize',fit);
   addEventListener('scroll',go,{passive:true});
   sv.addEventListener('loadedmetadata',go);
   sv.addEventListener('loadeddata',()=>sv.classList.add('on'));
-  // iPhone só carrega o vídeo depois de um play()
   const prime=()=>sv.play().then(()=>{sv.pause();go()}).catch(()=>{});
-  // vídeo inteiro na memória: hospedagem sem Range (Cloudflare Workers) deixa o vídeo sem poder pular para outro ponto
   fetch(sv.src).then(r=>r.ok?r.blob():Promise.reject()).then(b=>{sv.src=URL.createObjectURL(b)}).catch(()=>{}).finally(prime);
 }
 
-// avaliações: duplica a lista para o loop contínuo
 const track=$('.rv-track');
 if(track)[...track.children].forEach(c=>{const d=c.cloneNode(true);d.setAttribute('aria-hidden','true');d.querySelectorAll('a').forEach(a=>a.tabIndex=-1);track.append(d)});
 
-// projetos: prévia da foto seguindo o cursor
 const peek=$('.peek'),proj=$('.proj');
 if(peek&&proj&&fine){
   proj.querySelectorAll('a[data-img]').forEach(a=>{
@@ -522,41 +477,33 @@ if(peek&&proj&&fine){
   proj.addEventListener('pointermove',e=>{peek.style.left=(e.clientX+28)+'px';peek.style.top=(e.clientY-135)+'px'});
 }
 
-// frase de destaque: quebra em palavras para a animação de tinta
 const st=$('.statement p');
 if(st)st.innerHTML=st.textContent.trim().split(/\s+/).map((w,i)=>`<span style="--i:${i}">${w}</span>`).join(' ');
 
-// plano B (CSS ".io"): sem animação ligada à rolagem, cada elemento anima uma vez ao entrar na tela
 if(!calm&&!CSS.supports('animation-timeline','view()')){
   document.documentElement.classList.add('io');
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
-  // observa só o que o CSS ".io" deixou pausado esperando entrar na tela
   for(const el of document.body.querySelectorAll('*'))if(getComputedStyle(el).animationPlayState==='paused')io.observe(el);
 }
 
-// menu do dock
 const btn=$('#menuBtn'),menu=$('#menu');
 const setMenu=o=>{menu.classList.toggle('open',o);btn.setAttribute('aria-expanded',o);btn.textContent=o?'Fechar':'Menu'};
 btn.addEventListener('click',()=>setMenu(!menu.classList.contains('open')));
 menu.addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
 
-// troca de página: fecha a cortina antes de sair para outra página do site
 const curtainWord=$('.curtain b');
 document.addEventListener('click',e=>{
   const a=e.target.closest('a[href$=".html"]');
   if(!a||calm||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target)return;
   e.preventDefault();
-  // nome vem do item do menu com o mesmo destino (o logo, por exemplo, começa com "GRUPO")
   const item=menu.querySelector(`a[href="${a.getAttribute('href')}"]`);
   curtainWord.textContent=item?item.firstChild.textContent.trim():'Calderaro';
   document.documentElement.classList.add('leaving');
   setTimeout(()=>location.href=a.href,620);
 });
-// voltar pelo histórico (página guardada em cache) não pode reabrir com a cortina fechada
 addEventListener('pageshow',e=>{if(e.persisted){document.documentElement.classList.remove('leaving');curtainWord.textContent='Calderaro'}});
 
-// contato: monta a mensagem do formulário e abre o WhatsApp
 const form=$('#quote');
 if(form)form.addEventListener('submit',e=>{
   e.preventDefault();
